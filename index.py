@@ -59,3 +59,5 @@ dashboard = pn.Column(dashboard_title,
                      )
 
 dashboard.embed(max_opts = 5)
+
+panel serve index.py --show
