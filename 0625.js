@@ -131,13 +131,96 @@ async function getapi(url) {
 	document.getElementById("Temp23").innerHTML = parseInt(temp[23]) + 'ºF'; 	
 	document.getElementById("Dewp23").innerHTML = parseInt(dewp[23]) + 'ºF';
 	
-    if (document.getElementById("tableAsos").style.display === "none")
-        document.getElementById("tableAsos").style.display="table";
-	}
+	if (document.getElementById("tableAsos").style.display === "none")
+	document.getElementById("tableAsos").style.display="table";
 
-getapi(api_url)
+    var chart = new CanvasJS.Chart("chartContainer",
+		{ animationEnabled: true, 
+
+		  title:{
+		  text: "ASOS Data: " + insertedStation.toString() + " | " + insertedDate.toString()
+		  },
+		  
+		  axisX:{title: "Time (Eastern)",
+        		valueFormatString:  "##:53", 
+        		interval:1,  
+    	  },
+    	  
+    	  axisY:{title: "Temperature (F)",
+    	  },
+		  
+		data: [{
+			type: "line",
+			markerColor: "navy",
+			lineColor: 'navy',
+			dataPoints: [
+			{ x: 0, y: parseInt(temp[0])},
+			{ x: 1, y: parseInt(temp[1])},
+			{ x: 2, y: parseInt(temp[2])},
+			{ x: 3, y: parseInt(temp[3])},
+			{ x: 4, y: parseInt(temp[4])},
+			{ x: 5, y: parseInt(temp[5])},
+			{ x: 6, y: parseInt(temp[6])},
+			{ x: 7, y: parseInt(temp[7])},
+			{ x: 8, y: parseInt(temp[8])},
+			{ x: 8, y: parseInt(temp[9])},
+			{ x: 10, y: parseInt(temp[10])},
+			{ x: 11, y: parseInt(temp[11])},
+			{ x: 12, y: parseInt(temp[12])},
+			{ x: 13, y: parseInt(temp[13])},
+			{ x: 14, y: parseInt(temp[14])},
+			{ x: 15, y: parseInt(temp[15])},
+			{ x: 16, y: parseInt(temp[16])},
+			{ x: 17, y: parseInt(temp[17])},
+			{ x: 18, y: parseInt(temp[18])},
+			{ x: 19, y: parseInt(temp[19])},
+			{ x: 20, y: parseInt(temp[20])},
+			{ x: 21, y: parseInt(temp[21])},
+			{ x: 22, y: parseInt(temp[22])},
+			{ x: 23, y: parseInt(temp[23])},
+			]
+		  },
+		  
+		 {
+			type: "line",
+			markerColor: "green",
+			lineColor: "green",
+			dataPoints: [
+			{ x: 0, y: parseInt(dewp[0])},
+			{ x: 1, y: parseInt(dewp[1])},
+			{ x: 2, y: parseInt(dewp[2])},
+			{ x: 3, y: parseInt(dewp[3])},
+			{ x: 4, y: parseInt(dewp[4])},
+			{ x: 5, y: parseInt(dewp[5])},
+			{ x: 6, y: parseInt(dewp[6])},
+			{ x: 7, y: parseInt(dewp[7])},
+			{ x: 8, y: parseInt(dewp[8])},
+			{ x: 8, y: parseInt(dewp[9])},
+			{ x: 10, y: parseInt(dewp[10])},
+			{ x: 11, y: parseInt(dewp[11])},
+			{ x: 12, y: parseInt(dewp[12])},
+			{ x: 13, y: parseInt(dewp[13])},
+			{ x: 14, y: parseInt(dewp[14])},
+			{ x: 15, y: parseInt(dewp[15])},
+			{ x: 16, y: parseInt(dewp[16])},
+			{ x: 17, y: parseInt(dewp[17])},
+			{ x: 18, y: parseInt(dewp[18])},
+			{ x: 19, y: parseInt(dewp[19])},
+			{ x: 20, y: parseInt(dewp[20])},
+			{ x: 21, y: parseInt(dewp[21])},
+			{ x: 22, y: parseInt(dewp[22])},
+			{ x: 23, y: parseInt(dewp[23])},
+			]
+		  }
+		  ] 
+		  
+		  
+		  
+		});
+
+    chart.render();
+    
+    	}
+    	getapi(api_url)
 
 }
-
-
-
