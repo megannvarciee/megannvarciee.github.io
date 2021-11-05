@@ -1,32 +1,107 @@
+.background-image {
+  position: relative; 
+  top: 0; 
+  left: 0; 
+  background-size: cover
+}
+
 #heading1 {
-  color: black;
-  font-weight: bold;
+  color: white;
+  border-style: solid; 
+  border-width: 10px; 
+  border-color: transparent;
   text-align: center;
+  margin-left: 0%;
+  margin-top: 0%;
+  font-size: 60px; 
+  font-weight: 900;
+  font-family: 'Roboto';
 }
 
-button {
+.LeftColumn1 { 
+  color: white;
+  width: 30%; 
+  display: table-cell; 
+  height: 300px;
+  border-style: solid; 
+  border-width: 10px; 
+  border-color: transparent;
   text-align: center;
+  vertical-align: middle;
+  font-size: 28px; 
+  font-weight: 900;
+  font-family: 'Roboto'; 
 }
 
-Time {
-  color: black;
-  font-weight: normal;
+#SelectionOptions { 
+  color: white;
+  width: 30%; 
+  display: table-cell; 
+  height: 300px;
+  border-style: solid; 
+  border-width: 10px; 
+  border-color: transparent;
   text-align: center;
+  font-size: 18px; 
+  font-weight: 900;
+  font-family: 'Roboto'; 
 }
 
-table th {
-    width: auto !important;
+.RightColumn1 { 
+  display: table-cell; 
+  height: 300px;
+  text-align: center;
+  vertical-align: top;
+  border-style: solid; 
+  border-width: 10px; 
+  border-color: transparent;
 }
 
-body {
-	text-align: center
-	}
-	
-#tableAsos {
-    width: 800px;
-  	margin: auto;
+.Row2{ 
+  color: white;
+  display: table-cell; 
+  height: 300px;
+  border-style: solid; 
+  border-width: 10px; 
+  border-color: transparent;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 48px; 
+  font-weight: 900;
 }
 
-#th {
-  height: 400px;
+#clickButton { 
+  color: white;
+  min-width: 50%; 
+  display: table-cell; 
+  height: 50px;
+  border-style: solid; 
+  border-width: 2px; 
+  border-color: black;
+  text-align: center;
+  vertical-align: top;
+  font-size: 18px; 
+  font-weight: 900;
+  font-family: 'Roboto'; 
 }
+
+#divTable {
+  height: 300px; 
+  width: 95%;
+  overflow-y: auto;
+  border-style: solid; 
+  border-width: 10px; 
+  border-color: transparent;
+  position: relative;
+  text-align: center;
+  margin-left: 50px;
+  margin-bottom: -20px;
+} 
+
+thead{
+    top: 0;
+    position: sticky;
+}
+
+
+
