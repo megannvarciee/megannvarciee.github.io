@@ -97,17 +97,17 @@ body {
   font-family: 'Roboto'; 
 }
 
-#divTable {
-  height: 300px; 
-  width: 95%;
+#myDiv {
+  height: 900px; 
+  width: 50%;
   overflow-y: auto;
   border-style: solid; 
   border-width: 10px; 
   border-color: transparent;
-  position: relative;
+  position: absolute;
   text-align: center;
-  margin-left: 50px;
-  margin-bottom: -20px;
+  margin-left: 35%;
+  margin-bottom: 50%;
 } 
 
 thead{
