@@ -2,7 +2,21 @@
 margin-bottom:0;
 background-color: #08355c;
 height: 40px;
+font-weight: 900;
 }
+
+#Year {
+-webkit-user-select:text
+}
+
+#Month {
+-webkit-user-select:text
+}
+
+#Date1 {
+-webkit-user-select:text
+}
+
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {height: 650px}
@@ -41,3 +55,4 @@ text-align: center;
   color: white;
   opacity: 100%;
 }
+
