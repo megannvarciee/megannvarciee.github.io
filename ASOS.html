@@ -9,53 +9,56 @@
   <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
   <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="0625.js"></script>
+  <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+
+  <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
 
 </head>
 
 <body>
 
-      <!--HEADING-->
+  <!--HEADING-->
 
-      </br>
-      <div id="heading1">ASOS Archive</div>
-      </br>
-      </br>
+  </br>
+  <div id="heading1">ASOS Archive</div>
+  </br>
+  </br>
 
-      <!--BEGIN BODY CONTENT-->
+  <!--BEGIN BODY CONTENT-->
 
-      <!--First Row: 2 columns-->
-      <!--Column 1: Data Selector (i.e. date picker, station picker)-->
-      <!--Column 2: Table Output-->
+  <!--First Row: 2 columns-->
+  <!--Column 1: Data Selector (i.e. date picker, station picker)-->
+  <!--Column 2: Table Output-->
 
-      <div style="width: 100%; display: table;">
+  <div style="width: 100%; display: table;">
 
-        <!--BEGIN ROW 1-->
-        <div style="display: table-row">
+    <!--BEGIN ROW 1-->
+    <div style="display: table-row">
 
-          <!--BEGIN LEFT COLUMN-->
-          <div class=LeftColumn1>
+      <!--BEGIN LEFT COLUMN-->
+      <div class=LeftColumn1>
 
-            <!--BEGIN STATION SELECTION OPTION-->
-            <div id="selectionOptions">
+        <!--BEGIN STATION SELECTION OPTION-->
+        <div id="selectionOptions">
 
-              <label for="insertedStation">Station ID:</label>
-              <select id="insertedStation" name="Station" class="btn dropdown-toggle {color: black; background-color: white} border-dark">
-                <option value="ADG">ADG</option>
-                <option value="DET">DET</option>
-                <option value="DTW">DTW</option>
-                <option value="FNT">FNT</option>
-                <option value="MBS">MBS</option>
-                <option value="PTK">PTK</option>
-              </select>
+          <label for="insertedStation">Station ID:</label>
+          <select id="insertedStation" name="Station" class="btn dropdown-toggle {color: black; background-color: white} border-dark">
+            <option value="ADG">ADG</option>
+            <option value="DET">DET</option>
+            <option value="DTW">DTW</option>
+            <option value="FNT">FNT</option>
+            <option value="MBS">MBS</option>
+            <option value="PTK">PTK</option>
+          </select>
 
-              <!--END STATION SELECTION OPTION-->
-            </div>
+          <!--END STATION SELECTION OPTION-->
+        </div>
 
-            <!--BEGIN DATE PICKER-->
-            <div id="selectionOptions">
+        <!--BEGIN DATE PICKER-->
+        <div id="selectionOptions">
 
-              <label for="insertedDate">Pick a date:</label>
-              <input type="text" name="date" placeholder="      YYYY-MM-DD" id="insertedDate" onkeyup="
+          <label for="insertedDate">Pick a date:</label>
+          <input type="text" name="date" placeholder="      YYYY-MM-DD" id="insertedDate" onkeyup="
 						var v = this.value;
 						if (v.match(/^\d{4}$/) !== null) {
 							this.value = v + '-';
@@ -63,51 +66,80 @@
 							this.value = v + '-';
 						}" maxlength="10">
 
-              <!--END DATE PICKER-->
-            </div>
-
-            <!--BEGIN SUBMIT BUTTON-->
-            <button id="clickButton" onclick="myFunction(insertedDate.value, insertedStation.value)" class="btn btn-outline-dark" style="font-size : 18px" /> Click for ASOS Data
-
-            <!--END SUBMIT BUTTON-->
-            </button>
-
-            <!--END LEFT COLUMN-->
-          </div>
-
-          <!--BEGIN RIGHT COLUMN-->
-          <div id="chartContainer" class=RightColumn1>
-
-            <!--END RIGHT COLUMN-->
-          </div>
-
-          <!--END ROW 1-->
+          <!--END DATE PICKER-->
         </div>
 
+        <!--BEGIN SUBMIT BUTTON-->
+        <button id="clickButton" onclick="myFunction(insertedDate.value, insertedStation.value)" class="btn btn-outline-dark" style="font-size : 18px" /> Click for ASOS Data
+
+        <!--END SUBMIT BUTTON-->
+        </button>
+
+        <!--END LEFT COLUMN-->
       </div>
 
-      </br>
-      </br>
+      <!--BEGIN RIGHT COLUMN-->
+      <div id="chartContainer" class=RightColumn1>
 
-      <div style="width: 100%; display: table;">
-
-        <!--ROW 2-->
-
-        <div style=" width: 100%; display: table-row">
-
-          <div id='myDiv'>
-  
-          </div>
-
-        </div>
-
+        <!--END RIGHT COLUMN-->
       </div>
+
+      <!--END ROW 1-->
+    </div>
+
+  </div>
+
+  <!--ROW 2-->
+
+  <table id='myDiv' class='table table-dark table-hover table-striped' </table>
+    <br><br>
+    <button type="button" id="download-button">
+      download CSV
+    </button>
+
 </body>
+</div>
+</div>
+
+<script>
+  function htmlToCSV(html, filename) {
+    var data = [];
+    var rows = document.querySelectorAll("table tr");
+    for (var i = 0; i < rows.length; i++) {
+      var row = [],
+        cols = rows[i].querySelectorAll("td, th");
+      for (var j = 0; j < cols.length; j++) {
+        row.push(cols[j].innerText);
+      }
+      data.push(row.join(","));
+    }
+    downloadCSVFile(data.join("\n"), filename);
+  }
+</script>
+
+<script>
+  function downloadCSVFile(csv, filename) {
+    var csv_file, download_link;
+    csv_file = new Blob([csv], {
+      type: "text/csv"
+    });
+    download_link = document.createElement("a");
+    download_link.download = filename;
+    download_link.href = window.URL.createObjectURL(csv_file);
+    download_link.style.display = "none";
+    document.body.appendChild(download_link);
+    download_link.click();
+  }
+</script>
+
+<script>
+  document.getElementById("download-button").addEventListener("click", function() {
+    var html = document.querySelector("table").outerHTML;
+    htmlToCSV(html, insertedStation.value.toString() + '_' + insertedDate.value.toString() + ".csv");
+  });
+</script>
 
 <!--END BOTTOM ROW-->
-
-</div>
-</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
