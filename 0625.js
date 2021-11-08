@@ -1,9 +1,13 @@
-function myFunction(insertedDate, insertedStation) {
+function myFunction(Year, Month, Date1, insertedStation) {
   const api_url =
     "https://mesonet.agron.iastate.edu/api/1/obhistory.json?network=MI_ASOS&station=" +
     insertedStation.toString() +
     "&date=" +
-    insertedDate.toString() +
+    Year.toString() +
+    "-" + 
+    Month.toString() + 
+    "-" + 
+    Date1.toString() + 
     "&full=true";
 
   console.log(api_url);
@@ -43,7 +47,7 @@ function myFunction(insertedDate, insertedStation) {
       "Wind (kts)",
       "Wind Gusts (kts)"
     ];
-    var myTable = "<table><tr>";
+    var myTable = "<table><caption>Station ID: " + insertedStation.toString() + " | Date: " + Year.toString() + "-" + Month.toString() + "-" + Date1.toString() + "</caption><tr>";
 
     for (let i = 0; i < header.length; i++) {
       myTable += "<th>" + header[i] + "</th>";
@@ -63,4 +67,3 @@ function myFunction(insertedDate, insertedStation) {
 
   getapi(api_url);
 }
-
