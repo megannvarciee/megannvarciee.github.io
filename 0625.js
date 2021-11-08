@@ -25,6 +25,8 @@ function myFunction(Year, Month, Date1, insertedStation) {
     let dewp = [];
     let wnd = [];
     let gst = [];
+    let vsby = [];
+    let wx = [];
 
     for (let i = 0; i < data["data"].length; i++) {
       if (data["data"][i]["tmpf"] != null) {
@@ -37,15 +39,25 @@ function myFunction(Year, Month, Date1, insertedStation) {
         } else {
           gst.push(" ");
         }
-      }
-    }
+        vsby.push(parseInt(data["data"][i]["vsby"]));
+    	if (data["data"][i]["wxcodes"] != null) {
+          wx.push(data["data"][i]["wxcodes"]);
+        	} 
+        else {
+          wx.push(" ");
+        	}
+    	}
+    	}
+    
 
     var header = [
       "Time (ET)",
       "Temp (ºF)",
       "Dewpoint (ºF)",
       "Wind (kts)",
-      "Wind Gusts (kts)"
+      "Wind Gusts (kts)", 
+      "Visibility (mi)",
+      "Observed Weather"
     ];
     var myTable = "<table><caption>Station ID: " + insertedStation.toString() + " | Date: " + Year.toString() + "-" + Month.toString() + "-" + Date1.toString() + "</caption><tr>";
 
@@ -59,10 +71,14 @@ function myFunction(Year, Month, Date1, insertedStation) {
       myTable += "<td>" + dewp[i] + "</td>";
       myTable += "<td>" + wnd[i] + "</td>";
       myTable += "<td>" + gst[i] + "</td>";
+      myTable += "<td>" + vsby[i] + "</td>";
+      myTable += "<td>" + wx[i] + "</td>";
     }
 
     myTable += "</tr></table>";
     document.getElementById("myDiv").innerHTML = myTable;
+    document.getElementById("download-button").disabled = false
+    
   }
 
   getapi(api_url);
