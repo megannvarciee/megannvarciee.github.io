@@ -27,6 +27,7 @@ function myFunction(Year, Month, Date1, insertedStation) {
     let gst = [];
     let vsby = [];
     let wx = [];
+    let hrP = []; 
 
     for (let i = 0; i < data["data"].length; i++) {
       if (data["data"][i]["tmpf"] != null) {
@@ -46,8 +47,17 @@ function myFunction(Year, Month, Date1, insertedStation) {
         else {
           wx.push(" ");
         	}
+    	if (data["data"][i]["p01i"] == null) {
+    		hrP.push(" ");
+        	} 
+        else if (data["data"][i]["p01i"] == 0.0001) {
+          	hrP.push("T")
+        }
+        else {
+            hrP.push(data["data"][i]["p01i"]);
+        	}
     	}
-    	}
+    }
     
 
     var header = [
@@ -57,7 +67,8 @@ function myFunction(Year, Month, Date1, insertedStation) {
       "Wind (kts)",
       "Wind Gusts (kts)", 
       "Visibility (mi)",
-      "Observed Weather"
+      "Observed Weather", 
+      "Past Hour Precip",
     ];
     var myTable = "<table><caption>Station ID: " + insertedStation.toString() + " | Date: " + Year.toString() + "-" + Month.toString() + "-" + Date1.toString() + "</caption><tr>";
 
@@ -73,6 +84,7 @@ function myFunction(Year, Month, Date1, insertedStation) {
       myTable += "<td>" + gst[i] + "</td>";
       myTable += "<td>" + vsby[i] + "</td>";
       myTable += "<td>" + wx[i] + "</td>";
+      myTable += "<td>" + hrP[i] + "</td>";
     }
 
     myTable += "</tr></table>";
