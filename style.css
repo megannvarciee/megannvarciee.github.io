@@ -1,124 +1,41 @@
-body {
-  background-image: url("https://cdn.pixabay.com/photo/2019/05/19/23/47/clouds-4215608_1280.jpg");
-  position: relative;
-  max-height: 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
-  text-align: center;
+.jumbotron { 
+margin-bottom:0;
 }
 
-table {
-  position: relative;
-  max-height: 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {height: 650px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  padding-top: 20px;
+  background-color: #f1f1f1;
+  height: 100%;
 }
 
-.background-image {
-  position: relative;
-  top: 0;
-  left: 0;
-  min-height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
+/* Set gray background color and 100% height */
+#leftRow {
+  padding-top: 20px;
+  background-color: white;
+  max-height: 650px;
+  overflow-y: auto;
 }
 
-#heading1 {
-  color: white;
-  border-style: solid;
-  border-width: 10px;
-  border-color: transparent;
-  text-align: center;
-  margin-left: 0%;
-  margin-top: 0%;
-  font-size: 60px;
-  font-weight: 900;
-  font-family: "Roboto";
+.table caption { 
+caption-side: top;
+font-size; 24px;
+font-weight: 700;
+color: black; 
+text-align: center;
 }
 
-.LeftColumn1 {
-  color: white;
-  width: 30%;
-  display: table-cell;
-  height: 300px;
-  border-style: solid;
-  border-width: 10px;
-  border-color: transparent;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 28px;
-  font-weight: 900;
-  font-family: "Roboto";
+.table-hover tbody tr:hover td {
+  background-color: rgba(255, 255, 204, 1);
 }
 
-#SelectionOptions {
-  color: white;
-  width: 30%;
-  display: table-cell;
-  height: 300px;
-  border-style: solid;
-  border-width: 10px;
-  border-color: transparent;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 900;
-  font-family: "Roboto";
-}
-
-.RightColumn1 {
-  display: table-cell;
-  height: 300px;
-  text-align: center;
-  vertical-align: top;
-  border-style: solid;
-  border-width: 10px;
-  border-color: transparent;
-}
-
-.Row2 {
-  border-style: solid;
-  border-width: 10px;
-  border-color: transparent;
-  text-align: "center";
-  vertical-align: middle;
-  font-size: 48px;
-}
-
-#clickButton {
-  color: white;
-  min-width: 50%;
-  display: table-cell;
-  height: 50px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: black;
-  text-align: center;
-  vertical-align: top;
-  font-size: 18px;
-  font-weight: 900;
-  font-family: "Roboto";
-}
-
-#myDiv {
-  max-width: 50%;
-}
-
-.table-hover tbody tr:hover td,
-.table-hover tbody tr:hover th {
-  background-color: black;
-  opacity: 90%;
-  transparency: 100%;
-}
-
-thead {
+.table tbody tr th {
   top: 0;
   position: sticky;
+  background-color: black;
+  color: white;
+  opacity: 80%;
 }
