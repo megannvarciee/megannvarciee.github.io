@@ -1,17 +1,31 @@
 body {
-  background-image: url('https://cdn.pixabay.com/photo/2019/05/19/23/47/clouds-4215608_1280.jpg');
-  position: relative; 
-  top: 0; 
-  left: 0; 
-  min-height: 100%;
+  background-image: url("https://cdn.pixabay.com/photo/2019/05/19/23/47/clouds-4215608_1280.jpg");
+  position: relative;
+  max-height: 50%;
   background-size: cover;
   background-repeat: no-repeat;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+table {
+  position: relative;
+  max-height: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .background-image {
-  position: relative; 
-  top: 0; 
-  left: 0; 
+  position: relative;
+  top: 0;
+  left: 0;
   min-height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -19,98 +33,92 @@ body {
 
 #heading1 {
   color: white;
-  border-style: solid; 
-  border-width: 10px; 
+  border-style: solid;
+  border-width: 10px;
   border-color: transparent;
   text-align: center;
   margin-left: 0%;
   margin-top: 0%;
-  font-size: 60px; 
+  font-size: 60px;
   font-weight: 900;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
-.LeftColumn1 { 
+.LeftColumn1 {
   color: white;
-  width: 30%; 
-  display: table-cell; 
+  width: 30%;
+  display: table-cell;
   height: 300px;
-  border-style: solid; 
-  border-width: 10px; 
+  border-style: solid;
+  border-width: 10px;
   border-color: transparent;
   text-align: center;
   vertical-align: middle;
-  font-size: 28px; 
+  font-size: 28px;
   font-weight: 900;
-  font-family: 'Roboto'; 
+  font-family: "Roboto";
 }
 
-#SelectionOptions { 
+#SelectionOptions {
   color: white;
-  width: 30%; 
-  display: table-cell; 
+  width: 30%;
+  display: table-cell;
   height: 300px;
-  border-style: solid; 
-  border-width: 10px; 
+  border-style: solid;
+  border-width: 10px;
   border-color: transparent;
   text-align: center;
-  font-size: 18px; 
+  font-size: 18px;
   font-weight: 900;
-  font-family: 'Roboto'; 
+  font-family: "Roboto";
 }
 
-.RightColumn1 { 
-  display: table-cell; 
+.RightColumn1 {
+  display: table-cell;
   height: 300px;
   text-align: center;
   vertical-align: top;
-  border-style: solid; 
-  border-width: 10px; 
+  border-style: solid;
+  border-width: 10px;
   border-color: transparent;
 }
 
-.Row2{ 
-  color: white;
-  display: table-cell; 
-  min-height: 100%;
-  border-style: solid; 
-  border-width: 10px; 
-  border-color: red;
-  text-align: center;
+.Row2 {
+  border-style: solid;
+  border-width: 10px;
+  border-color: transparent;
+  text-align: "center";
   vertical-align: middle;
-  font-size: 48px; 
-  font-weight: 900;
+  font-size: 48px;
 }
 
-#clickButton { 
+#clickButton {
   color: white;
-  min-width: 50%; 
-  display: table-cell; 
+  min-width: 50%;
+  display: table-cell;
   height: 50px;
-  border-style: solid; 
-  border-width: 2px; 
+  border-style: solid;
+  border-width: 2px;
   border-color: black;
   text-align: center;
   vertical-align: top;
-  font-size: 18px; 
+  font-size: 18px;
   font-weight: 900;
-  font-family: 'Roboto'; 
+  font-family: "Roboto";
 }
 
 #myDiv {
-  height: 900px; 
-  width: 50%;
-  overflow-y: auto;
-  border-style: solid; 
-  border-width: 10px; 
-  border-color: transparent;
-  position: absolute;
-  text-align: center;
-  margin-left: 35%;
-  margin-bottom: 50%;
-} 
+  max-width: 50%;
+}
 
-thead{
-    top: 0;
-    position: sticky;
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: black;
+  opacity: 90%;
+  transparency: 100%;
+}
+
+thead {
+  top: 0;
+  position: sticky;
 }
