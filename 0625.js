@@ -29,8 +29,9 @@ function myFunction(Year, Month, Date1, insertedStation) {
     let wx = [];
     let hrP = []; 
     let relh = []; 
-    let windD = [];
+    let windD = []; 
     let dir = []; 
+    let metar = [];
 
     for (let i = 0; i < data["data"].length; i++) {
       if (data["data"][i]["tmpf"] != null) {
@@ -61,6 +62,7 @@ function myFunction(Year, Month, Date1, insertedStation) {
         	}
         relh.push(parseInt(data["data"][i]["relh"]));
         windD.push(parseInt(data["data"][i]["drct"]));
+        metar.push(data["data"][i]["raw"])
         
         var deg = data["data"][i]["drct"]
         
@@ -105,6 +107,8 @@ function myFunction(Year, Month, Date1, insertedStation) {
     	}
     }
     
+    console.log(metar)
+    
 
     var header = [
       "Time (ET)",
@@ -141,7 +145,28 @@ function myFunction(Year, Month, Date1, insertedStation) {
 
     myTable += "</tr></table>";
     document.getElementById("myDiv").innerHTML = myTable;
+    
+    
+    
+    
+    var headerRAW = [
+      "METARs"
+    ];
+    var myTableRAW = "<table><caption>Station ID: " + insertedStation.toString() + " | Date: " + Year.toString() + "-" + Month.toString() + "-" + Date1.toString() + "</caption><tr>";
+
+    for (let i = 0; i < headerRAW.length; i++) {
+      myTableRAW += "<th>" + headerRAW[i] + "</th>";
+    }
+
+    for (let i = 0; i < metar.length; i++) {
+      myTableRAW += "</tr><tr><td>" + metar[i] + "</td>";
+    }
+
+    myTableRAW += "</tr></table>";
+    document.getElementById("myDivRAW").innerHTML = myTableRAW;
+    
     document.getElementById("download-button").disabled = false
+    document.getElementById("download-button2").disabled = false
  
   
     var inputSubmit = document.getElementById("Date1");
