@@ -66,7 +66,12 @@ function myFunction(Year, Month, Date1, insertedStation) {
         windD.push(parseInt(data["data"][i]["drct"]));
         metar.push(data["data"][i]["raw"]);
 	alt.push(data["data"][i]["alti"]);
-	mslp.push(data["data"][i]["mslp"]);
+    	if (data["data"][i]["mslp"] != null) {
+          mslp.push(parseInt(data["data"][i]["mslp"]));
+        	} 
+        else {
+          mslp.push(" ");
+        	}
         
         var deg = data["data"][i]["drct"];
         
