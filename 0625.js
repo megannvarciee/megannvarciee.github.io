@@ -28,6 +28,9 @@ function myFunction(Year, Month, Date1, insertedStation) {
     let vsby = [];
     let wx = [];
     let hrP = []; 
+    let relh = []; 
+    let windD = []; 
+    let dir = []; 
 
     for (let i = 0; i < data["data"].length; i++) {
       if (data["data"][i]["tmpf"] != null) {
@@ -56,6 +59,49 @@ function myFunction(Year, Month, Date1, insertedStation) {
         else {
             hrP.push(data["data"][i]["p01i"]);
         	}
+        relh.push(parseInt(data["data"][i]["relh"]));
+        windD.push(parseInt(data["data"][i]["drct"]));
+        
+        var deg = data["data"][i]["drct"]
+        
+        if (deg>11.25 && deg<33.75){
+			dir.push("NNE");
+		  }else if (deg>33.75 && deg<56.25){
+			dir.push("ENE");
+		  }else if (deg>56.25 && deg<78.75){
+			dir.push("E");
+		  }else if (deg>78.75 && deg<101.25){
+			dir.push("ESE");
+		  }else if (deg>101.25 && deg<123.75){
+			dir.push("ESE");
+		  }else if (deg>123.75 && deg<146.25){
+			dir.push("SE");
+		  }else if (deg>146.25 && deg<168.75){
+			dir.push("SSE");
+		  }else if (deg>168.75 && deg<191.25){
+			dir.push("S");
+		  }else if (deg>191.25 && deg<213.75){
+			dir.push("SSW");
+		  }else if (deg>213.75 && deg<236.25){
+			dir.push("SW");
+		  }else if (deg>236.25 && deg<258.75){
+			dir.push("WSW");
+		  }else if (deg>258.75 && deg<281.25){
+			dir.push("W");
+		  }else if (deg>281.25 && deg<303.75){
+			dir.push("WNW");
+		  }else if (deg>303.75 && deg<326.25){
+			dir.push("NW");
+		  }else if (deg>326.25 && deg<348.75){
+			dir.push("NNW");
+		  }else if (deg == null){
+			dir.push(" ");
+		  }else if (deg==0 && data["data"][i]["sknt"] == 0){
+		    dir.push(" ");
+		  }else{
+			dir.push("N"); 
+		  }
+        
     	}
     }
     
@@ -64,7 +110,10 @@ function myFunction(Year, Month, Date1, insertedStation) {
       "Time (ET)",
       "Temp (ºF)",
       "Dewpoint (ºF)",
+      "Relative Humidity (%)",
       "Wind (kts)",
+      "Wind Dir (deg)", 
+      "Wind Dir", 
       "Wind Gusts (kts)", 
       "Visibility (mi)",
       "Observed Weather", 
@@ -80,7 +129,10 @@ function myFunction(Year, Month, Date1, insertedStation) {
       myTable += "</tr><tr><td>" + time[i] + "</td>";
       myTable += "<td>" + temp[i] + "</td>";
       myTable += "<td>" + dewp[i] + "</td>";
+      myTable += "<td>" + relh[i] + "</td>";
       myTable += "<td>" + wnd[i] + "</td>";
+      myTable += "<td>" + windD[i] + "</td>";
+      myTable += "<td>" + dir[i] + "</td>";
       myTable += "<td>" + gst[i] + "</td>";
       myTable += "<td>" + vsby[i] + "</td>";
       myTable += "<td>" + wx[i] + "</td>";
@@ -90,6 +142,18 @@ function myFunction(Year, Month, Date1, insertedStation) {
     myTable += "</tr></table>";
     document.getElementById("myDiv").innerHTML = myTable;
     document.getElementById("download-button").disabled = false
+ 
+  
+    var inputSubmit = document.getElementById("Date1");
+	inputSubmit.addEventListener("keyup", function(event) {
+ 	if (event.keyCode === 13) {
+  		event.preventDefault();
+   		document.getElementById("clickButton").click();
+  		}
+	});
+	
+	var tabs = document.getElementById("tabs");
+    tabs.style.display = "block";
     
   }
 
