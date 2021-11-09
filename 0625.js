@@ -29,7 +29,7 @@ function myFunction(Year, Month, Date1, insertedStation) {
     let wx = [];
     let hrP = []; 
     let relh = []; 
-    let windD = []; 
+    let windD = [];
     let dir = []; 
 
     for (let i = 0; i < data["data"].length; i++) {
