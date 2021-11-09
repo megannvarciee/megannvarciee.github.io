@@ -32,6 +32,8 @@ function myFunction(Year, Month, Date1, insertedStation) {
     let windD = []; 
     let dir = []; 
     let metar = [];
+    let alt = [];
+    let mslp = []; 
 
     for (let i = 0; i < data["data"].length; i++) {
       if (data["data"][i]["tmpf"] != null) {
@@ -62,9 +64,11 @@ function myFunction(Year, Month, Date1, insertedStation) {
         	}
         relh.push(parseInt(data["data"][i]["relh"]));
         windD.push(parseInt(data["data"][i]["drct"]));
-        metar.push(data["data"][i]["raw"])
+        metar.push(data["data"][i]["raw"]);
+	alt.push(data["data"][i]["alti"]);
+	mslp.push(data["data"][i]["mslp"]);
         
-        var deg = data["data"][i]["drct"]
+        var deg = data["data"][i]["drct"];
         
         if (deg>11.25 && deg<33.75){
 			dir.push("NNE");
@@ -121,7 +125,9 @@ function myFunction(Year, Month, Date1, insertedStation) {
       "Wind Gusts (kts)", 
       "Visibility (mi)",
       "Observed Weather", 
-      "Past Hour Precip",
+      "Past Hour Precip (in)",
+      "Altimeter (in)",
+      "MSLP (mb)"
     ];
     var myTable = "<table><caption>Station ID: " + insertedStation.toString() + " | Date: " + Year.toString() + "-" + Month.toString() + "-" + Date1.toString() + "</caption><tr>";
 
@@ -141,13 +147,12 @@ function myFunction(Year, Month, Date1, insertedStation) {
       myTable += "<td>" + vsby[i] + "</td>";
       myTable += "<td>" + wx[i] + "</td>";
       myTable += "<td>" + hrP[i] + "</td>";
+      myTable += "<td>" + alt[i] + "</td>";
+      myTable += "<td>" + mslp[i] + "</td>";
     }
 
     myTable += "</tr></table>";
     document.getElementById("myDiv").innerHTML = myTable;
-    
-    
-    
     
     var headerRAW = [
       "METARs"
