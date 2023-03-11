@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skew-t Examples</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../lib/skewt.css">
+	<!--IMPORT STYLESHEETS--> 
+  
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+	<style>
+		.btn-spc {
+			margin: 2px;
+		}
+	</style>
+  </head>
+  <body>
+    <div class="container">
+		<h2>Skew-T Archive Plot</h2>
+		<div class="row">		
+			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-12">
+						<select id="insertedStation" name="Station" class="btn dropdown-toggle {color: black; background-color: white} border-dark" style = "width: 100%">
+							<option value=" ">Select Station ID</option>
+							<option value="ADG">ADG</option>
+							<option value="CFS">CFS</option>
+							<option value="D95">D95</option>
+							<option value="DET">DET</option>
+							<option value="DTW">DTW</option>
+							<option value="DUH">DUH</option>
+							<option value="FNT">FNT</option>
+							<option value="HYX">HYX</option>
+							<option value="IKW">IKW</option>
+							<option value="MBS">MBS</option>
+							<option value="MTC">MTC</option>
+							<option value="ONZ">ONZ</option>
+							<option value="OZW">OZW</option>
+							<option value="P58">P58</option>
+							<option value="PHN">PHN</option>
+							<option value="PTK">PTK</option>
+							<option value="RNP">RNP</option>
+							<option value="TTF">TTF</option>
+							<option value="VLL">VLL</option>
+							<option value="YIP">YIP</option>
+						</select>
+					<br>
+					<br>
+					<select id="insertedModel" name="Model" class="btn dropdown-toggle {color: black; background-color: white} border-dark" style = "width: 100%">
+					<option value=" ">Select Model</option>
+					<option value="HRRR">HRRR</option>
+					<option value="RAP">RAP</option>
+					<option value="GFS">GFS</option>
+					<option value="NAM">NAM</option>
+					</select>
+					<br>
+					<br>
+					<input id = "InitYear" class = "btn dropdown-toggle {color: black; background-color: white} border-dark " type="text" placeholder="Year" aria-label="Year" style = "width: 100%"></input>
+					<input id = "InitMonth" class = "btn dropdown-toggle {color: black; background-color: white} border-dark " type="text" placeholder="Month" aria-label="Month" style = "width: 100%"></input>
+					<input id = "InitDay" class = "btn dropdown-toggle {color: black; background-color: white} border-dark " type="text" placeholder="Day" aria-label="Day" style = "width: 100%"></input>
+					<select id="InitTime" name="Initialization Time" class="btn dropdown-toggle {color: black; background-color: white} border-dark" style = "width: 100%" onchange="loadSingle(insertedStation.value, insertedModel.value, InitYear.value, InitMonth.value, InitDay.value, InitTime.value, ValidHour.value)">
+							<option value=" ">Select Initialization Time</option>
+							<option value="0">00z</option>
+							<option value="6">06z</option>
+							<option value="12">12z</option>
+							<option value="18">18z</option>
+					 <br>
+					 <br>
+					  <input type="range" id="ValidHour" name="Valid Time"
+							 min="0" max="18" value="0" onchange="loadSingle(insertedStation.value, insertedModel.value, InitYear.value, InitMonth.value, InitDay.value, InitTime.value, ValidHour.value)"></input>
+					  <label for="ValidHour">ValidHour</label>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-12">
+						<button class="btn btn-primary" onClick="loadSingle(insertedStation.value, insertedModel.value, InitYear.value, InitMonth.value, InitDay.value, InitTime.value, ValidHour.value);">load</button>
+						<button class="btn btn-primary" onClick="skewt.clear();">clear</button>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-6">	
+				<p id="demo"></p>		
+				<div class="row">
+					<div class="col-md-12 panel panel-default">
+						<div id="skewt">
+						</div>
+					</div>
+				</div>
+				<div>
+					<p>Known Bugs:</p> 
+					<p> - Dewpoint curve goes to 0 in upper levels due to null data</p>
+					<p> - Cases where month or year transitions occur may fail </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <script src="../lib/skewt.min.js"  charset="UTF-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+	<script>
+
+	function loadSingle(insertedStation, insertedModel, InitYear, InitMonth, InitDay, InitTime, ValidHour) {
+	
+// Logic to create URL for API // 
+
+	// Logic for the "time" section of the API: "&time=2023-03-01T14%3A00" 
+	// This is the forecast hour, not the initialization time. So it's the actual hour that you want to see the forecast! 
+	// Some issues that might be encountered here are differences in the init day vs. valid day, month, year, etc. Special cases though! 
+
+		// First we need to create our initial "date string" from the Year, Month, Day inputs 
+			
+		// Okay so now we have our "dateString" to work with in the format of YYYY-MM-DD. Now let's determine our "forecast hour"
+		
+			// InitTime = runtime 
+			// ValidHour = time
+
+	    var initDate = InitYear.toString() + '-' + InitMonth.toString() + '-' + InitDay.toString()
+		var total_hour = parseInt(InitTime) + parseInt(ValidHour)
+			
+		// If the total_hour is greater than 23 (i.e. the initialization is 18z and forecast hour is 10), then we need to adjust both the 
+		// date AND forecast hour to create the correct URL 
+		
+		if (total_hour > 23) {
+	        var total_hour = (parseInt(InitTime) + parseInt(ValidHour)) - 24	
+	        var plusDay = parseInt(InitDay) + 1
+	        if (plusDay < 10) {
+				var dateString = InitYear.toString() + '-' + InitMonth.toString() + '-0' + plusDay.toString()
+				}
+			else {
+				var dateString = InitYear.toString() + '-' + InitMonth.toString() + '-' + plusDay.toString()
+			}
+		}
+		
+		else { 
+			var dateString = InitYear.toString() + '-' + InitMonth.toString() + '-' + InitDay.toString()	
+		}
+		
+		var init = InitTime.toString() 
+		if (total_hour < 10) { 
+			var valid = '0' + total_hour 
+		}
+		else { 
+			var valid = total_hour
+		}
+		
+		
+// Print out result // 
+		console.log(dateString)	
+		console.log(total_hour)	
+		
+		const api_url = "https://mesonet.agron.iastate.edu/api/1/nws/bufkit.json?model=" +  		
+		insertedModel.toString() +   		
+		"&time=" +  		
+		dateString.toString() + "T" + total_hour.toString() +  		
+		"%3A00&runtime=" +  		
+		InitYear.toString() + '-' + InitMonth.toString() + '-' + InitDay.toString() + "T" + InitTime.toString() +   		
+		"%3A00&station=K" +  		
+		insertedStation.toString() +  		
+		"&fall=false"
+		
+		console.log(api_url);
+		
+		document.getElementById("demo").innerHTML = insertedModel.toString() + ' ' + initDate + ' Init: ' + init + 'Z | Valid: ' + dateString + ' ' + valid + 'Z';
+
+	  // Defining async function
+	  async function getapi(url) {
+		// Storing response
+		const response = await fetch(url);
+		// Storing data in form of JSON
+		var data = await response.json();	
+		var arr = [];
+		for (let i = 0; i < data["profiles"][0]["levels"].length; i++) {
+			var dict = {} 		
+			dict["press"] = data["profiles"][0]["levels"][i]["PRES"]
+			dict["hght"] = data["profiles"][0]["levels"][i]["HGHT"]
+			dict["temp"] = data["profiles"][0]["levels"][i]["TMPC"]
+			dict["dwpt"] = data["profiles"][0]["levels"][i]["DWPC"]
+			dict["wdir"] = data["profiles"][0]["levels"][i]["DRCT"] 
+			dict["wspd"] = data["profiles"][0]["levels"][i]["SKNT"] * 0.51444  
+			arr.push(dict)} 
+		try {
+			var json = arr;			
+			if(json!=null)
+				skewt.plot(json);
+				console.log(json);
+		}		
+		catch(err) {
+		    console.log(err);
+		    alert(err);
+		}			
+		}	    
+		getapi(api_url);
+			
+	}
+	
+	var skewt = new SkewT('#skewt');
+
+	</script>	
+  </body>
+</html>
