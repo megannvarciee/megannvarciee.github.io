@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Skew-t Examples</title>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../lib/skewt.css">
+	<link rel="stylesheet" type="text/css" href="skewt.css">
 	<!--IMPORT STYLESHEETS--> 
   
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -152,8 +152,6 @@
 		
 		
 // Print out result // 
-		console.log(dateString)	
-		console.log(total_hour)	
 		
 		const api_url = "https://mesonet.agron.iastate.edu/api/1/nws/bufkit.json?model=" +  		
 		insertedModel.toString() +   		
@@ -164,8 +162,6 @@
 		"%3A00&station=K" +  		
 		insertedStation.toString() +  		
 		"&fall=false"
-		
-		console.log(api_url);
 		
 		document.getElementById("demo").innerHTML = insertedModel.toString() + ' ' + initDate + ' Init: ' + init + 'Z | Valid: ' + dateString + ' ' + valid + 'Z';
 
